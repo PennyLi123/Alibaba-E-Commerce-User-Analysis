@@ -46,7 +46,7 @@ Recommendations are provided based on these dimensions. See the diagram below fo
 
 ### Feel Free to use the interactive [dashboard.](https://public.tableau.com/app/profile/penny.li5621/viz/AlibabaE-commerceUserBehaviourAnalysis/Dashboard1)
 
-![Alibaba User Dashboard.png](❗️插入图片)
+![Alibaba User Dashboard.png](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/Alibaba%20User%20Dashboard.png)
 
 
 # Data Loading and Cleaning
