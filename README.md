@@ -26,7 +26,8 @@ The analysis is conducted from 3 dimensions:
 * 𝐏𝐫𝐨𝐝𝐮𝐜𝐭𝐬 (user preferences for products).
 Recommendations are provided based on these dimensions. See the diagram below for details.
 
-【❗️插入图片: Analysis Framework】
+![Analysis Framework](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Analysis%20Framework.png)
+
 
 
 # Advanced SQL Techniques 
