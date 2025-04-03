@@ -54,6 +54,7 @@ Recommendations are provided based on these dimensions. See the diagram below fo
 ## 1.Data Souce & Description
 
 Dataset File Name: UserBehaviour.csv
+
 Description: Contains all user behaviour data
 Included fields: User ID, Product ID, Category ID, Behaviour Type, Timestamp
 
@@ -75,21 +76,27 @@ Dataset Size Details：
 ## 2. Data Import 
 
 * Create a new database named “TaobaoUserBehaviours” using MySQL
-  【❗️插入图片: data import 1】
+  ![data import 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/data%20import%201.png)
+
 
 * Create a table that matches the structure of the CSV data
-  【❗️插入图片: data import 2】
+
+    ![data import 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/data%20import%202.png)
 
 * Import External Data Source into table created
-  【❗️插入图片: data import 3】
-  【❗️插入图片: data import 4】
-  【❗️插入图片: data import 5】
+
+  ![data import 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/data%20import%203.png)
+
+  ![data import 4](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/data%20import%204.png)
+
+  ![data import 5](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/data%20import%205.png)
 
 
 ## 3. Data Cleaning
 
 * Remove Null Values
   【❗️插入图片: Remove Null Values】
+    ![Remove Null data](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/delete%20Null%20data.png)
   
 * Check for Duplicate Values
 SELECT user_id, product_id, timestamps FROM userbehaviour
