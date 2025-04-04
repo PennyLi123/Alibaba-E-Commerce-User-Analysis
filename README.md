@@ -95,81 +95,114 @@ Dataset Size Details：
 ## 3. Data Cleaning
 
 * Remove Null Values
-  【❗️插入图片: Remove Null Values】
     ![Remove Null data](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/delete%20Null%20data.png)
   
 * Check for Duplicate Values
 SELECT user_id, product_id, timestamps FROM userbehaviour
 GROUP BY user_id, product_id, timestamps
 HAVING count(*)>1;
- 【❗️插入图片: Duplicate values exist】
-
+  ![Duplicate values exist](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Duplicate%20values%20exist.png)
+  
 * Remove duplicates
 Add an ID column and set it as an auto-increment primary key, disable safe update mode, and use self-join to remove duplicate values.
 •	Use JOIN to connect the main table with the subquery results (t2) to identify and delete duplicate records with non-minimum IDs, thereby removing duplicates and retaining only one record (min id) per group.
 (sql)
 ALTER TABLE userbehaviour ADD id INT FIRST;
- 【❗️插入图片: Remove duplicates 1】
- 【❗️插入图片: Remove duplicates 2】
- 【❗️插入图片: Remove duplicates 3】
- 【❗️插入图片: Remove duplicates 4】
+
+![Remove duplicates 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Remove%20duplicates%201.png)
+
+![Remove duplicates 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Remove%20duplicates%202.png)
+
+![Remove duplicates 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Remove%20duplicates%203.png)
+
+![Remove duplicates 4](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Remove%20duplicates%204.png)
 
   * Add new columns
 For easier analysis later, adding three new columns—dates, times, and hours.
- 【❗️插入图片: Add new columns 1】
+
+![Add new columns 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Add%20new%20columns%201.png)
 
 (sql)
 UPDATE userbehaviour 
 SET datetimes= FROM_UNIXTIME(timestamps);
 •Convert the values in the timestamps column to a standard date and time format, and store them in the newly added datetimes column, where the new column only stores dates and times with no fractional seconds.
 •However, the execution took too long (nearly 2 hours) and resulted in an ERROR. Therefore, it was decided to update the data in batches based on the 'id' column, processing 10,000 rows per batch until all records are updated.
- 【❗️插入图片: Add new columns 2_Error】
+
+ ![Add new columns 2_Error](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Add%20new%20columns%202_Error.png)
 
  Batch processing：
- 【❗️插入图片:  Batch processing 1】
+
+ ![Batch processing 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch%20processing%201.png)
+ 
 The maximum value of the ID is 100,150,807. 
 Below are the SQL queries for updating in 10 batches.
 
-【❗️插入图片:  Batch 1 updated】
-【❗️插入图片:  Batch 2 updated】 
-【❗️插入图片:  Batch 3 updated】 
-【❗️插入图片:  Batch 4 updated】
-【❗️插入图片:  Batch 5 updated】
-【❗️插入图片:  Batch 6 updated】
-【❗️插入图片:  Batch 7 updated】
-【❗️插入图片:  Batch 8 updated】
-【❗️插入图片:  Batch 9 updated】
-【❗️插入图片:  Batch 10 updated】
-【❗️插入图片:  Batch1 to 10 verify】
+
+ ![Batch 1 updated](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch%201%20updated%20.png)
+ 
+ ![Batch 2 updated](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch%202%20updated%20.png)
+
+ ![Batch 3 updated](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch%203%20updated.png)
+
+ ![Batch 4 updated](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch%204%20updated%20.png)
+
+ ![Batch 5 updated](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch%205%20updated%20.png)
+
+ ![Batch 6 updated](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch%206%20updated%20.png)
+
+ ![Batch 7 updated](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch%207%20updated%20.png)
+
+ ![Batch 8 updated](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch%208%20updated%20.png)
+
+ ![Batch 9 updated](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch%209%20updated%20.png)
+
+ ![Batch 10 updated](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch%2010%20updated%20.png)
+
+ ![Batch1 to 10 verify](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Batch1%20to%2010%20verify.png)
 
 * Extract dates, times, hours components and store in new separate columns
 •Create new columns for date, time, hours
- 【❗️插入图片:  Create new columns for date  time hours】
+
+ ![Create new columns for date  time hours](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Create%20new%20columns%20for%20date%20%20time%20hours.png)
 
 •Update dates, times, hours columns in bathces
-【❗️插入图片:  dates times hours batch 1】
-【❗️插入图片:  dates times hours batch 2】
-【❗️插入图片:  dates times hours batch 3】
-【❗️插入图片:  dates times hours batch 4】
-【❗️插入图片:  dates times hours batch 5】
-【❗️插入图片:  dates times hours batch 6】
-【❗️插入图片:  dates times hours batch 7】
-【❗️插入图片:  dates times hours batch 8】
-【❗️插入图片:  dates times hours batch 9】
-【❗️插入图片:  dates times hours batch 10】
+
+ ![dates times hours batch 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/dates%20times%20hours%20batch%201.png)
+
+ ![dates times hours batch 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/dates%20times%20hours%20batch%202.png)
+
+ ![dates times hours batch 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/dates%20times%20hours%20batch%203.png)
+
+ ![dates times hours batch 4](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/dates%20times%20hours%20batch%204.png)
+
+ ![dates times hours batch 5](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/dates%20times%20hours%20batch%205.png)
+
+ ![dates times hours batch 6](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/dates%20times%20hours%20batch%206.png)
+
+ ![dates times hours batch 7](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/dates%20times%20hours%20batch%207.png)
+
+ ![dates times hours batch 8](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/dates%20times%20hours%20batch%208.png)
+
+ ![dates times hours batch 9](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/dates%20times%20hours%20batch%209.png)
+
+ ![dates times hours batch 10](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/dates%20times%20hours%20batch%2010.png)
 
 * Check for null values in the newly added columns
 318 rows of null data were found
-  【❗️插入图片:  318 row null data】
+
+   ![318 row null data](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/318%20row%20null%20data%20.png)
 
   delete Null data
-  【❗️插入图片:  delete Null data】
+  
+     ![delete Null data](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/delete%20Null%20data.png)
 
 * Remove outlier data
 According to the dataset description, the datetimes should be between 2017-11-25 and 2017-12-03. By checking the minimum and maximum values in the datetimes column, records were found that fall outside this range. Therefore, values that do not meet the definition were deleted.
-  【❗️插入图片:  remove outlier 1】
-  【❗️插入图片:  remove outlier 2】
 
+       ![remove outlier 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/remove%20outlier%201.png)
+
+       ![remove outlier 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/remove%20outlier%202.png)
+  
 # Data Analysis
 
 ## (1)	 Website Performance Data 
@@ -179,26 +212,35 @@ According to the dataset description, the datetimes should be between 2017-11-25
 •	UV (total unique visitors)
 •	Page Depth = PV/ UV
 
-  【❗️插入图片:  traffic 1】
-  【❗️插入图片:  traffic 2】
-  【❗️插入图片:  traffic 3】
-  【❗️插入图片:  traffic 4】
+
+![traffic 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/traffic%201.png)
+
+![traffic 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/traffic%202.png)
+
+![traffic 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/traffic%203.png)
+
+![traffic 4](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/traffic%204.png)
+
 According to the traffic data metrics table above, 2017-12-02 was a Saturday, and 2017-12-3 was a Sunday. It is evident that the website had higher traffic on the weekend.
 
 (b)	Retention rate
 It specifically refers to the average proportion of active users on a given day during a statistical period (week/month) who continue to open the app on day N.
 Since the statistical period is relatively short, so only calculates the next-day retention rate.
-  【❗️插入图片:  retention 1】
-  【❗️插入图片:  retention 2】
+
+![retention 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/retention%201.png)
+
+![retention 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/retention%202.png)
 
 (c)Bounce rate
 Bounce rate refers to the percentage of visits in which a user enters through a specific landing page and leaves without navigating to any other pages, relative to the total visits to that page.
 
 The number of bounced visitors is 92
-  【❗️插入图片:  bounce visitor 92】
+
+![bounce visitor 92](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/bounce%20visitor%2092.png)
 
 Total unique visitors is 6899210.
-  【❗️插入图片:  unique visitors】
+
+  ![unique visitors](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/unique%20visitors.png)
 
 Bounce rate=Bounced visitors/Total unique visitors
                                =92/6899210
@@ -208,9 +250,12 @@ Bounce rate=Bounced visitors/Total unique visitors
 
 ### (𝐚) 𝐁𝐞𝐡𝐚𝐯𝐢𝐨𝐮𝐫 & 𝐓𝐢𝐦𝐞 𝐂𝐨𝐫𝐫𝐞𝐥𝐚𝐭𝐢𝐨𝐧 𝐀𝐧𝐚𝐥𝐲𝐬𝐢𝐬
 Analyse whether users' behaviour is related to time and whether they browse or shop more frequently during specific time periods
- 【❗️插入图片:  behaviour time 1】
- 【❗️插入图片:  behaviour time 2】
- 【❗️插入图片:  behaviour time 3】
+
+  ![behaviour time 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20time%201.png)
+
+  ![behaviour time 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20time%202.png)
+
+  ![behaviour time 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20time%203.png)
 
 ### (𝐛) 𝐔𝐬𝐞𝐫 𝐂𝐨𝐧𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐑𝐚𝐭𝐞 𝐀𝐧𝐚𝐥𝐲𝐬𝐢𝐬 
 Counted the number of users for each behaviour type (pv,cart,fav,buy) .
@@ -219,16 +264,21 @@ There is 670370 users who ‘buy’.
                 = 670370/6899210
                 =9.72%
 
- 【❗️插入图片:  conversion 1】
- 【❗️插入图片:  conversion 2】
- 【❗️插入图片:  conversion 3】
+
+ ![conversion 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/conversion%201.png)
+
+ ![conversion 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/conversion%202.png)
+
+ ![conversion 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/%20conversion%203.png)
 
  𝐂𝐨𝐮𝐧𝐭 𝐨𝐟 𝐝𝐢𝐟𝐟𝐞𝐫𝐞𝐧𝐭 𝐛𝐞𝐡𝐚𝐯𝐢𝐨𝐮𝐫 𝐭𝐲𝐩𝐞𝐬 :
 Created a table behaviour_count to store the count of different behaviour types and then inserting the count into that table. 
- 【❗️插入图片:  conversion 4】
+
+    ![conversion 4](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/%20conversion%204.png)
  
  The results are 1998944 ‘buy’ actions, 2852536 ‘fav’ actions, and 5466117 ‘cart’ actions. 
- 【❗️插入图片:  conversion 5】
+
+    ![conversion 5](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/conversion%205.png)
 
 𝑷𝒖𝒓𝒄𝒉𝒂𝒔𝒆 𝑹𝒂𝒕𝒆 𝒊𝒔 𝒕𝒚𝒑𝒊𝒄𝒂𝒍𝒍𝒚 𝒄𝒂𝒍𝒄𝒖𝒍𝒂𝒕𝒆𝒅 𝒂𝒔:
 
@@ -256,23 +306,34 @@ Analyse the user behaviour path to see 𝒘𝒉𝒆𝒕𝒉𝒆𝒓 𝒖𝒔𝒆
 
 Create a ‘𝒗𝒊𝒆𝒘‘ aggregates the number of different behaviour types (pv, fav, cart, buy) for each user and product (user_id and product_id).
 Then creat another view to standardise the behaviours into binary values (1 or 0).
- 【❗️插入图片:  behaviour path 1】
- 【❗️插入图片:  behaviour path 2】
+
+    ![behaviour path 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20path%201.png)
+
+    ![behaviour path 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20path%202.png)
  This view standardises the behaviours into binary values (1 or 0).
- 【❗️插入图片:  behaviour path 3】
- 【❗️插入图片:  behaviour path 4】
+
+     ![behaviour path 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20path%203.png)
+
+     ![behaviour path 4](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20path%204.png)
 Created a view user_behaviour_path to extract users who made a purchase and track their behaviour path.
- 【❗️插入图片:  behaviour path 5】
+
+     ![behaviour path 5](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20path%205.png)
  This view path_count counts how many users followed each unique behaviour path.
-【❗️插入图片:  behaviour path 6】
+
+    ![behaviour path 6](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20path%206.png)
 Created a lookup table named path_s for purchase_path codes.
-【❗️插入图片:  behaviour path 7】
+
+    ![behaviour path 7](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20path%207.png)
+    
 •	Helps with readability by providing human-friendly descriptions.
 •	Optimises analysis by enabling joins with path_count view.
-【❗️插入图片:  behaviour path 8】
-【❗️插入图片:  behaviour path 9】
+
+    ![behaviour path 8](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20path%208.png)
+
+    ![behaviour path 9](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20path%209.png)
 Inner Join path_count and path_s
-【❗️插入图片:  behaviour path 10】
+
+    ![behaviour path 10](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/behaviour%20path%2010.png)
 
 ### (𝐝) 𝐑𝐅𝐌 𝐌𝐨𝐝𝐞𝐥
 Among various customer relationship management (CRM) analytical models, the RFM model is one of the most widely referenced. 
@@ -286,24 +347,36 @@ Since this dataset does not include purchase amounts, customer value is assessed
 •	recency of purchase 
 
 * Search and store the customer's most recent purchase time and spending amount.
-【❗️插入图片:  rfm 1】
-【❗️插入图片:  rfm 2】
-【❗️插入图片:  rfm 3】
+
+    ![rfm 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/rfm%201.png)
+
+    ![rfm 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/rfm%202.png)
+
+    ![rfm 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/rfm%203.png)
 
 * Segment users based on purchase frequency.
-【❗️插入图片:  rfm segment 1】
-【❗️插入图片:  rfm segment 2】
+
+    ![rfm segment 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/rfm%20segment%201.png)
+
+    ![rfm segment 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/rfm%20segment%202.png)
 
 * Segment users based on their most recent purchase time.
-【❗️插入图片:  rfm recency 1】
-【❗️插入图片:  rfm recency 2】
-【❗️插入图片:  rfm recency 3】
+
+    ![rfm recency 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/rfm%20recency%201.png)
+
+    ![rfm recency 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/rfm%20recency%202.png)
+
+    ![rfm recency 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/rfm%20recency%203.png)
 
 * Calculate the composite score and segment customers into tiers.
-【❗️插入图片:    rfm model 1】
-【❗️插入图片:    rfm model 2】
-【❗️插入图片:    rfm model 3】
-【❗️插入图片:    rfm model 4】
+
+    ![rfm model 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/rfm%20model%201.png)
+
+    ![rfm model 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/%20%20rfm%20model%202.png)
+
+    ![rfm model 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/rfm%20model%203.png)
+
+    ![rfm model 4](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/rfm%20model%204.png)
 
 ## （3）Product data 
 
@@ -332,15 +405,20 @@ product_id INT,
 pv INT);
 
 * 𝐓𝐨𝐩 𝟏𝟎 𝐜𝐚𝐭𝐞𝐠𝐨𝐫𝐢𝐞𝐬 𝐛𝐲 𝐯𝐢𝐞𝐰𝐬
-【❗️插入图片:    Top 10 categories 1】
-【❗️插入图片:    Top 10 categories 2】
+
+    ![Top 10 categories 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Top%2010%20categories%201.png)
+
+    ![Top 10 categories 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Top%2010%20categories%202.png)
 
 * 𝐓𝐨𝐩 𝟏𝟎 𝐩𝐫𝐨𝐝𝐮𝐜𝐭𝐬 𝐛𝐲 𝐯𝐢𝐞𝐰𝐬
-【❗️插入图片:    Top 10 products by views】
 
+    ![Top 10 products by views](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Top%2010%20products%20by%20views.png)
+  
 * 𝐓𝐨𝐩 𝟏 𝐩𝐫𝐨𝐝𝐮𝐜𝐭𝐬 𝐢𝐧 𝐞𝐚𝐜𝐡 𝐓𝐨𝐩 𝟏𝟎 𝐜𝐚𝐭𝐞𝐠𝐨𝐫𝐢𝐞𝐬  𝐫𝐚𝐧𝐤 𝐛𝐲 𝐯𝐢𝐞𝐰𝐬
-【❗️插入图片:    top product by cate 1】
-【❗️插入图片:    top product by cate 2】
+
+    ![top product by cate 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/top%20product%20by%20cate%201.png)
+
+    ![top product by cate 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/top%20product%20by%20cate%202.png)
 
 ### (b)Product Rank by Conversion Rate
 Conversion rate, which is purchase rate. 
@@ -348,19 +426,32 @@ Conversion rate, which is purchase rate.
 •	category conversion rate
 
 * Product conversion rate:
-【❗️插入图片:    Product conversion rate 1】
-【❗️插入图片:    Product conversion rate 2】
-【❗️插入图片:    Product conversion rate 3】
+
+    ![Product conversion rate 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Product%20conversion%20rate%201.png)
+
+    ![Product conversion rate 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Product%20conversion%20rate%202.png)
+
+    ![Product conversion rate 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Product%20conversion%20rate%203.png)
 
 * Category conversion rate:
-【❗️插入图片:    Category conversion rate 1】
-【❗️插入图片:    Category conversion rate 2】
-【❗️插入图片:    Category conversion rate 3】
+
+    ![Category conversion rate 1](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Category%20conversion%20rate%201.png)
+
+    ![Category conversion rate 2](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Category%20conversion%20rate%202.png)
+
+    ![Category conversion rate 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Category%20conversion%20rate%203.png)
 
 # Summary
 Alibaba Taobao User Behaviour Tableau Dashboard
 
 ### Feel Free to use the interactive [dashboard.](https://public.tableau.com/app/profile/penny.li5621/viz/AlibabaE-commerceUserBehaviourAnalysis/Dashboard1)
 
-![Alibaba User Dashboard.png](❗️插入图片)
+𝐒𝐭𝐚𝐛𝐥𝐞 𝐓𝐫𝐚𝐟𝐟𝐢𝐜 𝐰𝐢𝐭𝐡 𝐇𝐢𝐠𝐡 𝐑𝐞𝐭𝐞𝐧𝐭𝐢𝐨𝐧:
+Website traffic is stable with a high retention rate and strong user engagement. Traffic is higher on weekends compared to weekdays, with a noticeable increase on December 2nd and 3rd, likely due to the pre-sales campaign for December Winter Sale.
+𝐂𝐥𝐞𝐚𝐫 𝐁𝐞𝐡𝐚𝐯𝐢𝐨𝐫𝐚𝐥 𝐏𝐚𝐭𝐭𝐞𝐫𝐧𝐬:
+User activity peaks during two golden time periods: 10:00-17:00 and 20:00-00:00, when users are most active.
+𝐈𝐦𝐩𝐚𝐜𝐭 𝐨𝐟 𝐀𝐝𝐝-𝐭𝐨-𝐂𝐚𝐫𝐭 𝐨𝐧 𝐒𝐚𝐥𝐞𝐬:
+Adding products to the cart significantly influences purchase volume, indicating it is a crucial step in the conversion process.
+𝐏𝐨𝐩𝐮𝐥𝐚𝐫 𝐏𝐫𝐨𝐝𝐮𝐜𝐭 𝐂𝐚𝐭𝐞𝐠𝐨𝐫𝐢𝐞𝐬 𝐨𝐧 𝐓𝐚𝐨𝐛𝐚𝐨:
+Taobao features standout popular product categories, drawing considerable attention from users.
 
