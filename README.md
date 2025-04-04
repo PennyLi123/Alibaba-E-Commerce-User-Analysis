@@ -40,13 +40,32 @@ Recommendations are provided based on these dimensions. See the diagram below fo
 * RFM Model for Customer Segmentation
 * Joins & Data Enrichment (LEFT JOIN, INNER JOIN)
 
-
+# Analysis Outcome Summary
 
 ## Alibaba Taobao User Behaviour Tableau Dashboard
 
 ### Feel Free to use the interactive [dashboard.](https://public.tableau.com/app/profile/penny.li5621/viz/AlibabaE-commerceUserBehaviourAnalysis/Dashboard1)
 
 ![Alibaba User Dashboard.png](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/Alibaba%20User%20Dashboard.png)
+
+𝐒𝐭𝐚𝐛𝐥𝐞 𝐓𝐫𝐚𝐟𝐟𝐢𝐜 𝐰𝐢𝐭𝐡 𝐇𝐢𝐠𝐡 𝐑𝐞𝐭𝐞𝐧𝐭𝐢𝐨𝐧:
+Platform traffic is stable with a high retention rate and strong user engagement. Traffic is higher on weekends compared to weekdays, with a noticeable increase on December 2nd and 3rd, likely due to the pre-sales campaign for December Winter Sale.
+𝐂𝐥𝐞𝐚𝐫 𝐁𝐞𝐡𝐚𝐯𝐢𝐨𝐫𝐚𝐥 𝐏𝐚𝐭𝐭𝐞𝐫𝐧𝐬:
+User activity peaks during two golden time periods: 10:00-17:00 and 20:00-00:00, when users are most active.
+𝐈𝐦𝐩𝐚𝐜𝐭 𝐨𝐟 𝐀𝐝𝐝-𝐭𝐨-𝐂𝐚𝐫𝐭 𝐨𝐧 𝐒𝐚𝐥𝐞𝐬:
+Adding products to the cart significantly influences purchase volume, indicating it is a crucial step in the conversion process.
+𝐏𝐨𝐩𝐮𝐥𝐚𝐫 𝐏𝐫𝐨𝐝𝐮𝐜𝐭 𝐂𝐚𝐭𝐞𝐠𝐨𝐫𝐢𝐞𝐬 𝐨𝐧 𝐓𝐚𝐨𝐛𝐚𝐨:
+Taobao features standout popular product categories, drawing considerable attention from users.
+
+𝐑𝐞𝐜𝐨𝐦𝐦𝐞𝐧𝐝𝐚𝐭𝐢𝐨𝐧𝐬 - 𝐖𝐞𝐛𝐬𝐢𝐭𝐞 𝐏𝐞𝐫𝐟𝐨𝐫𝐦𝐚𝐧𝐜𝐞 𝐎𝐩𝐭𝐢𝐦𝐢𝐳𝐚𝐭𝐢𝐨𝐧
+𝑴𝒂𝒙𝒊𝒎𝒊𝒛𝒆 𝑷𝒆𝒂𝒌 𝑯𝒐𝒖𝒓𝒔: Run promotions, invest in featured placements, and boost exposure during high-traffic periods (especially 14:00 & 21:00).
+𝑫𝒓𝒊𝒗𝒆 𝑬𝒏𝒈𝒂𝒈𝒆𝒎𝒆𝒏𝒕 & 𝑺𝒂𝒍𝒆𝒔: Encourage users to add to cart and wishlist to increase conversions.
+Enhance Pre-Event Visibility: Increase product listings and optimize keywords before major sales events.
+
+𝐔𝐬𝐞𝐫 𝐎𝐩𝐭𝐢𝐦𝐢𝐳𝐚𝐭𝐢𝐨𝐧 𝐒𝐮𝐠𝐠𝐞𝐬𝐭𝐢𝐨𝐧𝐬
+1. 𝑰𝒎𝒑𝒍𝒆𝒎𝒆𝒏𝒕 𝑺𝒆𝒈𝒎𝒆𝒏𝒕𝒆𝒅 𝑹𝒆𝒕𝒆𝒏𝒕𝒊𝒐𝒏 𝑺𝒕𝒓𝒂𝒕𝒆𝒈𝒊𝒆𝒔:(High-Value Users)Focus on engagement and satisfaction to improve retention.(Active Users)Boost their purchase frequency with targeted promotions.(Lapsed Users)Offer exclusive discounts to re-engage them.(New/Inactive Users) Use promotions to activate and engage this group.
+2. 𝑬𝒏𝒄𝒐𝒖𝒓𝒂𝒈𝒆 𝑨𝒅𝒅-𝒕𝒐-𝑪𝒂𝒓𝒕 𝑩𝒆𝒉𝒂𝒗𝒊𝒐𝒓:
+Run promotions like Add to Cart for Coupons or Exclusive Perks for Added Items to incentivize adding items to the cart. Introduce interactive features such as user Q&A to improve engagement and drive conversions.
 
 
 # Data Loading and Cleaning
@@ -442,16 +461,5 @@ Conversion rate, which is purchase rate.
     ![Category conversion rate 3](https://github.com/PennyLi123/Alibaba-E-Commerce-User-Analysis/blob/main/readme%20pictures/Category%20conversion%20rate%203.png)
 
 # Summary
-Alibaba Taobao User Behaviour Tableau Dashboard
-
-### Feel Free to use the interactive [dashboard.](https://public.tableau.com/app/profile/penny.li5621/viz/AlibabaE-commerceUserBehaviourAnalysis/Dashboard1)
-
-𝐒𝐭𝐚𝐛𝐥𝐞 𝐓𝐫𝐚𝐟𝐟𝐢𝐜 𝐰𝐢𝐭𝐡 𝐇𝐢𝐠𝐡 𝐑𝐞𝐭𝐞𝐧𝐭𝐢𝐨𝐧:
-Website traffic is stable with a high retention rate and strong user engagement. Traffic is higher on weekends compared to weekdays, with a noticeable increase on December 2nd and 3rd, likely due to the pre-sales campaign for December Winter Sale.
-𝐂𝐥𝐞𝐚𝐫 𝐁𝐞𝐡𝐚𝐯𝐢𝐨𝐫𝐚𝐥 𝐏𝐚𝐭𝐭𝐞𝐫𝐧𝐬:
-User activity peaks during two golden time periods: 10:00-17:00 and 20:00-00:00, when users are most active.
-𝐈𝐦𝐩𝐚𝐜𝐭 𝐨𝐟 𝐀𝐝𝐝-𝐭𝐨-𝐂𝐚𝐫𝐭 𝐨𝐧 𝐒𝐚𝐥𝐞𝐬:
-Adding products to the cart significantly influences purchase volume, indicating it is a crucial step in the conversion process.
-𝐏𝐨𝐩𝐮𝐥𝐚𝐫 𝐏𝐫𝐨𝐝𝐮𝐜𝐭 𝐂𝐚𝐭𝐞𝐠𝐨𝐫𝐢𝐞𝐬 𝐨𝐧 𝐓𝐚𝐨𝐛𝐚𝐨:
-Taobao features standout popular product categories, drawing considerable attention from users.
-
+Alibaba Taobao User Behaviour Tableau Dashboard 
+[dashboard.](https://public.tableau.com/app/profile/penny.li5621/viz/AlibabaE-commerceUserBehaviourAnalysis/Dashboard1)
